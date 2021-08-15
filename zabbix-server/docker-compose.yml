@@ -27,11 +27,11 @@ services:
       - network-zabbix
     links:
       - mysql
-        #restart: always
+        restart: always
     ports:
       - '10051:10051'
     volumes:
-      - './zabbix/alertscripts:/usr/lib/zabbix/alertscripts'
+      - './zabbix1/alertscripts:/usr/lib/zabbix/alertscripts'
     environment:
       - DB_SERVER_HOST=mysql
       - MYSQL_DATABASE=zabbix
@@ -47,7 +47,7 @@ services:
       - network-zabbix
     links:
       - mysql
-        #restart: always
+    restart: always
     ports:
       - '80:8080'
       - '443:8443'
@@ -68,7 +68,7 @@ services:
     links:
       - mysql
       - zabbix-server
-        # restart: always
+    restart: always
     ports:
       - '3000:3000'
     environment: 
@@ -84,7 +84,7 @@ services:
       - network-zabbix
     links:
       - zabbix-server
-        #restart: always
+    restart: always
     privileged: true
     volumes:
       - /var/run:/var/run
